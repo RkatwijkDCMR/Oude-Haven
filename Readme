@@ -1,0 +1,40 @@
+# Scraper voor Geluidsmetingen (Oude haven)
+
+## Overzicht
+Deze Python‐script haalt automatisch screenshots (foto’s) van geluidsmetingen (highcharts‐punten) van de website [Mesure Bruitparif](https://mesure.bruitparif.fr/priv/rotterdam/immersive). Je kunt per datum instellen tussen welke uren (bijvoorbeeld van 08:00 tot 19:00) alle punten voor die dag gescraped worden. De script navigeert per week in de grafiek, filtert op datum en uur, en bewaart alleen de afbeeldingen en metadata die binnen het opgegeven tijdsinterval vallen.
+
+---
+
+## Inhoud van dit repository
+- `scraper.py`  
+  De hoofdscript die:
+  1. Verbindt met de website via Selenium.
+  2. Vertaalt Franstalige datums/tijden naar Nederlandse notatie.
+  3. Bepaalt op basis van de eerste “DisplayPeriod” de startdatum van week 0.
+  4. Navigeert per gewenste week en selecteert alleen de punten die óf een datum én uur hebben binnen de opgegeven intervallen.
+  5. Maakt per maand en per week een folder aan, slaat daarin de screenshots op als `YYYYMMDD_HH.png` en bewaard een pickled metadata‐bestand (`metadata.pkl`).
+
+- `requirements.txt`  
+  Een lijst met alle Python‐packages die nodig zijn om de script te draaien (zoals Selenium, pandas, pyautogui, webdriver‐manager, e.d.).
+
+- `README.md`  
+  Dit bestand met uitleg en instructies.
+
+---
+
+## Vereisten
+1. **Python 3.8+**  
+2. Virtuele omgeving (bij voorkeur `venv` of conda)  
+3. Browser: Google Chrome (versie ≥ 100).  
+4. ChromeDriver (wordt automatisch geïnstalleerd via `webdriver‐manager`).  
+5. Een Windows‐omgeving (de `pyautogui`‐stappen gebruiken Windows‐specificaties voor context‐click en toetsaanslagen).  
+   - Als je op Linux/macOS wilt draaien, moet je de `pyautogui`‐acties voor bestandsopslag aanpassen of een alternatief gebruiken (bijv. `driver.save_screenshot(...)`).
+
+---
+
+## Installatie
+
+1. **Clone dit repository** (of kopieer de bestanden naar je lokale machine):
+   ```bash
+   git clone https://github.com/RkatwijkDCMR/oude-haven-scraper.git
+   cd oude-haven-scraper
